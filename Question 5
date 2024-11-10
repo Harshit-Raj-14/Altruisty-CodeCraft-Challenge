@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class StrengthTest {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int numTrainees = 4;
+        int numRounds = 3;
+        int[][] strength = new int[numRounds][numTrainees];
+
+        for (int round = 0; round < numRounds; round++) {
+            for (int trainee = 0; trainee < numTrainees; trainee++) {
+                int strengthValue = sc.nextInt();
+
+                if (strengthValue < 1 || strengthValue > 200) {
+                    System.out.println("INVALID INPUT");
+                    return; 
+                }
+
+                strength[round][trainee] = strengthValue;
+            }
+        }
+
+        int[] averages = new int[numTrainees];
+        for (int trainee = 0; trainee < numTrainees; trainee++) {
+            int totalStrength = 0;
+            for (int round = 0; round < numRounds; round++) {
+                totalStrength += strength[round][trainee];
+            }
+
+            averages[trainee] = (int) Math.round(totalStrength / (double) numRounds);
+        }
+
+        int maxAverage = -1;
+        for (int avg : averages) {
+            if (avg > maxAverage) {
+                maxAverage = avg;
+            }
+        }
+
+        if (maxAverage < 100) {
+            System.out.println("All trainees are unfit.");
+            return;
+        }
+
+        for (int i = 0; i < numTrainees; i++) {
+            if (averages[i] == maxAverage) {
+                System.out.println("Trainee Number : " + (i + 1));
+            }
+        }
+
+        sc.close();
+    }
+}
