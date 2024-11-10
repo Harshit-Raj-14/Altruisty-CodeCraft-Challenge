@@ -1,0 +1,24 @@
+import java.util.*;
+public class RealEstateProfit {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        if (n <= 1) {
+            System.out.println(0);
+            return;
+        }
+        int minPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
+        for (int i = 0; i < n; i++) {
+            int price = scanner.nextInt();
+            if (price < minPrice) {
+                minPrice = price;
+            }
+            int potentialProfit = price - minPrice;
+            if (potentialProfit > maxProfit) {
+                maxProfit = potentialProfit;
+            }
+        }
+        System.out.println(maxProfit);
+    }
+}
